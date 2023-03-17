@@ -9,16 +9,16 @@ class doctor(models.Model):
         ('Male', 'Male'),
         ('Female', 'Female')
     ]
-    DAYS_OF_WEEK = [
-    (0, 'Monday'),
-    (1, 'Tuesday'),
-    (2, 'Wednesday'),
-    (3, 'Thursday'),
-    (4, 'Friday'),
-    (5, 'Saturday'),
-    (6, 'Sunday'),
-    (7, 'not determine ye'),
-    ]
+    # DAYS_OF_WEEK = [
+    # (0, 'Monday'),
+    # (1, 'Tuesday'),
+    # (2, 'Wednesday'),
+    # (3, 'Thursday'),
+    # (4, 'Friday'),
+    # (5, 'Saturday'),
+    # (6, 'Sunday'),
+    # (7, 'not determine ye'),
+    # ]
 
     name = models.CharField(max_length=50)
     gender = models.CharField(max_length=50, choices=genders, default='Male')
@@ -30,7 +30,7 @@ class doctor(models.Model):
     password = models.CharField(max_length=150, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     qualifications = models.TextField(null=True, blank=True)
-    days = models.CharField(max_length=1, choices=DAYS_OF_WEEK,default=7)
+    # days = models.CharField(max_length=1, choices=DAYS_OF_WEEK,default=7)
     # add salary to ERD digram
     salary = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
 
@@ -70,19 +70,18 @@ class patient( models.Model):
         ('cash', 'cash'),
         ('VISA', 'VISA')
     ]
+    
     name = models.CharField(max_length=50)
-    gender = models.CharField(
-          max_length=50, choices=genders)
+    gender = models.CharField(max_length=50, choices=genders)
     image=models.ImageField(upload_to='doctors/',default='None',null=True,blank=True)
-
-    address = models.CharField(
-          max_length=50, null=True, blank=True)
+    address = models.CharField(max_length=50, null=True, blank=True)
     username = models.CharField(  max_length=50)
     email = models.EmailField(max_length=254,null=True, blank=True, default=None)
     phone_number = models.IntegerField( null=True, blank=True,default='None')
     password = models.CharField( max_length=150)
-    age = models.IntegerField( )
-    payment_method = models.CharField(max_length=50, null=True, blank=True,default='cash', choices=payments)
+    age = models.IntegerField( null=True, blank=True)
+    
+    # payment_method = models.CharField(max_length=50, null=True, blank=True,default='cash', choices=payments)
 
     # health info 
     blood_type = models.CharField(
