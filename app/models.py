@@ -22,7 +22,7 @@ class doctor(models.Model):
 
     name = models.CharField(max_length=50)
     gender = models.CharField(max_length=50, choices=genders, default='Male')
-    image=models.ImageField(upload_to='photos/doctors/%y%m%d',default=None,null=True,blank=True)
+    # image=models.ImageField(upload_to='photos/doctors/%y%m%d',default=None,null=True,blank=True)
  # add address  to ERD {% endcomment %}
     address = models.CharField(max_length=50, null=True, blank=True)
     username = models.CharField(max_length=254, null=True, blank=True)
@@ -73,7 +73,7 @@ class patient( models.Model):
     
     name = models.CharField(max_length=50)
     gender = models.CharField(max_length=50, choices=genders)
-    image=models.ImageField(upload_to='doctors/',default='None',null=True,blank=True)
+    # image=models.ImageField(upload_to='doctors/',default='None',null=True,blank=True)
     address = models.CharField(max_length=50, null=True, blank=True)
     username = models.CharField(  max_length=50)
     email = models.EmailField(max_length=254,null=True, blank=True, default=None)
@@ -139,7 +139,7 @@ class secretary(models.Model):
     name = models.CharField(max_length=50)
     gender = models.CharField(
         max_length=50, choices=genders, default='Male', null=True, blank=True)
-    image=models.ImageField(upload_to='photos/doctors/%y%m%d',default=None,null=True,blank=True)
+    # image=models.ImageField(upload_to='photos/doctors/%y%m%d',default=None,null=True,blank=True)
 
     address = models.CharField(max_length=50, null=True, blank=True)
     username = models.CharField(max_length=50)
