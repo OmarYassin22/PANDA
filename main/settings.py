@@ -13,12 +13,15 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
+<<<<<<< HEAD
 import environ
 
 
 env = environ.Env()
 environ.Env.read_env()
 
+=======
+>>>>>>> e4b08e6cc61869a52e58f1515fb0e753944cf452
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -102,7 +105,11 @@ WSGI_APPLICATION = "main.wsgi.application"
 #     }
 # }
 DATABASES = {
+<<<<<<< HEAD
     'default': dj_database_url.parse(env('DATABASE_URL'))
+=======
+    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+>>>>>>> e4b08e6cc61869a52e58f1515fb0e753944cf452
 }
 
 # Password validation
@@ -132,9 +139,15 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
+<<<<<<< HEAD
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'back\static')]
+=======
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "static/"
+>>>>>>> e4b08e6cc61869a52e58f1515fb0e753944cf452
 MEDIA_URL = 'media/'
 
 # Default primary key field type
