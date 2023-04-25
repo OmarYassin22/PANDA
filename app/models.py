@@ -108,7 +108,7 @@ class report_appiontment(models.Model):
     def __str__(self):
         return str(self.patient)
     class Meta:
-        unique_together =['date','time']
+        unique_together =['date','time','doc']
     
 
 class secretary(models.Model):
