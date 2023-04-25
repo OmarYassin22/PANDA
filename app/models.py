@@ -9,29 +9,16 @@ class doctor(models.Model):
         ('Male', 'Male'),
         ('Female', 'Female')
     ]
-    # DAYS_OF_WEEK = [
-    # (0, 'Monday'),
-    # (1, 'Tuesday'),
-    # (2, 'Wednesday'),
-    # (3, 'Thursday'),
-    # (4, 'Friday'),
-    # (5, 'Saturday'),
-    # (6, 'Sunday'),
-    # (7, 'not determine ye'),
-    # ]
+   
 
     name = models.CharField(max_length=50)
     gender = models.CharField(max_length=50, choices=genders, default='Male')
-    # image=models.ImageField(upload_to='photos/doctors/%y%m%d',default=None,null=True,blank=True)
- # add address  to ERD {% endcomment %}
     address = models.CharField(max_length=50, null=True, blank=True)
     username = models.CharField(max_length=254, null=True, blank=True)
     phone_number = models.IntegerField( null=True, blank=True)
     password = models.CharField(max_length=150, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     qualifications = models.TextField(null=True, blank=True)
-    # days = models.CharField(max_length=1, choices=DAYS_OF_WEEK,default=7)
-    # add salary to ERD digram
     salary = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
 
 
@@ -84,7 +71,7 @@ class patient( models.Model):
     # health info 
     blood_type = models.CharField(
         max_length=50, choices=blood_types, null=True, blank=True,default="Not defined")
-     diabete = models.BooleanField( default=False, null=True, blank=True)
+    diabete = models.BooleanField( default=None, null=True, blank=True)
     diabete_type = models.CharField(max_length=50,default="Not defined", choices=diabete_types, null=True, blank=True)
     blood_presure = models.BooleanField(default=False, null=True, blank=True)
     diseases = models.TextField(default='No Diseases',null=True, blank=True)
