@@ -103,7 +103,7 @@ class report_appiontment(models.Model):
     symptoms=models.TextField(null=True, blank=True,default='Not Writen yet')
     result = models.TextField(null=True, blank=True, default='Not Writen yet')
     drugs = models.TextField(null=True, blank=True, default='Not Writen yet')
-    cost=models.DecimalField(max_digits=8, decimal_places=2,default=0)
+    cost=models.DecimalField(max_digits=8, decimal_places=2,default=0,null=True,blank=True)
     done=models.BooleanField(default=False)
     def __str__(self):
         return str(self.patient)
