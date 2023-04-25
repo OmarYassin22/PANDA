@@ -72,22 +72,20 @@ class patient( models.Model):
     ]
     
     name = models.CharField(max_length=50)
-    gender = models.CharField(max_length=50, choices=genders)
-    # image=models.ImageField(upload_to='doctors/',default='None',null=True,blank=True)
-    address = models.CharField(max_length=50, null=True, blank=True)
+    gender = models.CharField(max_length=50, choices=genders,default="Male",null=True,blank=True )
+    address = models.CharField(max_length=50, null=True, blank=True,default="There is no current address")
     username = models.CharField(  max_length=50)
     email = models.EmailField(max_length=254,null=True, blank=True, default=None)
     phone_number = models.IntegerField( null=True, blank=True,default='None')
     password = models.CharField( max_length=150)
     age = models.IntegerField( null=True, blank=True)
     
-    # payment_method = models.CharField(max_length=50, null=True, blank=True,default='cash', choices=payments)
 
     # health info 
     blood_type = models.CharField(
-        max_length=50, choices=blood_types, null=True, blank=True)
-    diabete = models.BooleanField( default=False, null=True, blank=True)
-    diabete_type = models.CharField(max_length=50,default=None, choices=diabete_types, null=True, blank=True)
+        max_length=50, choices=blood_types, null=True, blank=True,default="Not defined")
+     diabete = models.BooleanField( default=False, null=True, blank=True)
+    diabete_type = models.CharField(max_length=50,default="Not defined", choices=diabete_types, null=True, blank=True)
     blood_presure = models.BooleanField(default=False, null=True, blank=True)
     diseases = models.TextField(default='No Diseases',null=True, blank=True)
     
