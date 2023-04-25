@@ -80,7 +80,6 @@ class patient( models.Model):
         return self.name
     class Meta:
         unique_together=['username']
-
 class login_form(models.Model):
     characters=[
         ('doctor', 'doctor'),
@@ -93,7 +92,7 @@ class login_form(models.Model):
     password=models.CharField( max_length=50)
 
     
-    class report_appiontment(models.Model): 
+class report_appiontment(models.Model): 
     doc = models.ForeignKey(
         doctor, on_delete=models.DO_NOTHING,null=True,blank=True)
     patient = models.ForeignKey(
