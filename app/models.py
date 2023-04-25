@@ -12,8 +12,8 @@ class doctor(models.Model):
    
 
     name = models.CharField(max_length=50)
-    gender = models.CharField(max_length=50, choices=genders, default='Male')
-    address = models.CharField(max_length=50, null=True, blank=True)
+    gender = models.CharField(max_length=50, choices=genders, default='Male',null=True,blank=True)
+    address = models.CharField(max_length=50, null=True, blank=True,default="There is No Address for communication ")
     username = models.CharField(max_length=254, null=True, blank=True)
     phone_number = models.IntegerField( null=True, blank=True)
     password = models.CharField(max_length=150, null=True, blank=True)
@@ -91,12 +91,9 @@ class login_form(models.Model):
     character = models.CharField(max_length=50,default='patient')
     username=models.CharField( max_length=50)
     password=models.CharField( max_length=50)
-# make relation between secreatry and reports
-# merge appiontment and report in ERD
-class report_appiontment(models.Model):
-  
- 
-    # ضيف الاعصاض
+
+    
+    class report_appiontment(models.Model): 
     doc = models.ForeignKey(
         doctor, on_delete=models.DO_NOTHING,null=True,blank=True)
     patient = models.ForeignKey(
@@ -124,8 +121,6 @@ class secretary(models.Model):
     name = models.CharField(max_length=50)
     gender = models.CharField(
         max_length=50, choices=genders, default='Male', null=True, blank=True)
-    # image=models.ImageField(upload_to='photos/doctors/%y%m%d',default=None,null=True,blank=True)
-
     address = models.CharField(max_length=50, null=True, blank=True)
     username = models.CharField(max_length=50)
     phone_number = models.IntegerField( null=True, blank=True)
@@ -139,7 +134,6 @@ class secretary(models.Model):
     class Meta:
         unique_together=['username']
 
-    # edit relation between schedual and doctor => to report_appiontment
 class schedule(models.Model):
     report = models.ForeignKey(report_appiontment, on_delete=models.PROTECT)
     def __str__(self):
