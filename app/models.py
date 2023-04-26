@@ -91,19 +91,16 @@ class login_form(models.Model):
     username=models.CharField( max_length=50)
     password=models.CharField( max_length=50)
 
-    
-class report_appiontment(models.Model): 
-    doc = models.ForeignKey(
-        doctor, on_delete=models.DO_NOTHING,null=True,blank=True)
-    patient = models.ForeignKey(
-        patient, on_delete=models.DO_NOTHING, null=True, blank=True)
-    date = models.DateField( auto_now=False, auto_now_add=False)
-    time = models.TimeField(auto_now=False, auto_now_add=False)
+class report_appiontment(models.Model):
+    date = models.DateField( auto_now=False, auto_now_add=False,default=None,null=True,blank=True)
+    time = models.TimeField(auto_now=False, auto_now_add=False,default=None,null=True,blank=True)
     report = models.TextField( null=True, blank=True,default='Not Writen yet')
-    symptoms=models.TextField(null=True, blank=True,default='Not Writen yet')
+    doc = models.ForeignKey(doctor, on_delete=models.CASCADE,null=True,blank=True,related_name='patients' )
+    patient = models.ForeignKey(patient, on_delete=models.CASCADE, null=True, blank=True,related_name='doctors')
+    cost=models.DecimalField(null=True, blank=True,max_digits=8, decimal_places=2,default=0)
     result = models.TextField(null=True, blank=True, default='Not Writen yet')
     drugs = models.TextField(null=True, blank=True, default='Not Writen yet')
-    cost=models.DecimalField(max_digits=8, decimal_places=2,default=0,null=True,blank=True)
+    symptoms=models.TextField(null=True, blank=True,default='Not Writen yet')
     done=models.BooleanField(default=False)
     def __str__(self):
         return str(self.patient)
