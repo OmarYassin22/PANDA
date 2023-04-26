@@ -16,5 +16,5 @@ class SecreatarySerializer(serializers.ModelSerializer):
 class DoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model=doctor
-        fields='__all__'
+        fields=['id','name','gender','address','username','phone_number','password','age','qualifications','salary','patients']
         
