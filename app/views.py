@@ -140,48 +140,14 @@ class doctor_reports(APIView):
     
 #reposrt_appointment
 
-@api_view(['POST','GET'])
-# def Reports(request):
-#     reports=report_appiontment.objects.all()
-#     if request.method == 'GET':
-#         serializer=ReportSerializer(reports,many=True)
-#         return Response(serializer.data)
-#     elif request.method == 'POST':
-#         serializer=ReportSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data,status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-   
-# @api_view(['GET','PUT','DELETE'])
-# def Reports_id(request,id):
-#     try:
-#         reports=report_appiontment.objects.get(id=id)
-#     except report_appiontment.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#     if request.method == 'GET':
-#         serializer=ReportSerializer(reports)
-#         return Response(serializer.data)
-#     elif request.method == 'PUT':
-#         serializer=ReportSerializer(reports,data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data,status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors)
-#     elif request.method == 'DELETE':
-#         reports.delete()
-#         return Response(status=status.HTTP_201_CREATED)
-
-
 class reports(generics.ListCreateAPIView):
     queryset=report_appiontment.objects.all()
     serializer_class=ReportSerializer
-    
+
 class reports_id(generics.RetrieveUpdateDestroyAPIView):
     queryset=report_appiontment.objects.all()
     serializer_class=ReportSerializer
-
- class filter_rep(APIView):
+class filter_rep(APIView):
     def get(self,request,*args,**kwargs):
         queryset=report_appiontment.objects.all()
         flag=self.request.query_params.get('done',None)
@@ -208,13 +174,6 @@ class reports_id(generics.RetrieveUpdateDestroyAPIView):
                 now=datetime.strptime(now,date_format)
                 queryset=queryset.filter(date__range=[from_date,now])
 
-        
-        serializer=ReportSerializer(queryset,many=True)
-        return Response(serializer.data)
-        
-   
-    
-    
  
 #secretary
 
