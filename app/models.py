@@ -32,16 +32,7 @@ class doctor(models.Model):
         ('Male', 'Male'),
         ('Female', 'Female')
     ]
-    # DAYS_OF_WEEK = [
-    # (0, 'Monday'),
-    # (1, 'Tuesday'),
-    # (2, 'Wednesday'),
-    # (3, 'Thursday'),
-    # (4, 'Friday'),
-    # (5, 'Saturday'),
-    # (6, 'Sunday'),
-    # (7, 'not determine ye'),
-    # ]
+
 
     name = models.CharField(max_length=50)
     gender = models.CharField(max_length=50, choices=genders, default='Male',null=True,blank=True)
@@ -50,9 +41,7 @@ class doctor(models.Model):
     phone_number = models.IntegerField( null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     qualifications = models.TextField(null=True, blank=True)
-    # days = models.CharField(max_length=1, choices=DAYS_OF_WEEK,default=7)
     salary = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
-    # patinets=models.ManyToManyField(patient,related_name='doctor_patient')
 
 
 
