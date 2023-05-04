@@ -18,9 +18,10 @@ class User(AbstractUser):
             return str(self.username+' / secretary')
         elif self.is_patient:
             return str(self.username+' / Patient')
-
         else:
             return str(self.username+' / Admin')  
+        
+        
 @receiver(post_save,sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender,instance,created,*args, **kwargs):
     if created:
