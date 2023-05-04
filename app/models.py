@@ -11,14 +11,16 @@ class User(AbstractUser):
     is_patient=models.BooleanField(default=False)
     is_doctor=models.BooleanField(default=False)
     is_secretary=models.BooleanField(default=False)
-    def __str__(self):
+      def __str__(self):
         if self.is_doctor: 
             return str(self.username+' / doctor')
         elif self.is_secretary:
             return str(self.username+' / secretary')
-            
+        elif self.is_patient:
+            return str(self.username+' / Patient')
+
         else:
-            return str(self.username+' / patient')  
+            return str(self.username+' / Admin')  
 @receiver(post_save,sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender,instance,created,*args, **kwargs):
     if created:
