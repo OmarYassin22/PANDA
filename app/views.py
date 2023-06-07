@@ -358,43 +358,108 @@ class Secretary_id(APIView):
         
 
 
-class signup_patients(generics.GenericAPIView):
-    serializer_class=patient_serializer
+class signup_patients(APIView):
+    # serializer_class=patient_serializer
     
     def post(self,request,*args, **kwargs):
-        serializer=self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user=serializer.save()
-        return Response({
-            "user":UserSerializer(user,context=self.get_serializer_context()).data,
-            "token":Token.objects.get(user=user).key,
-            "message":"account created successfully"
-        })
+        try:
+            serializer=patient_serializer(data=request.data['user'])
+            serializer.is_valid(raise_exception=True)
+                
+            user=serializer.save()
+            if request.data['profile']:
+
+                prof=request.data['profile']
+                print(prof)
+                profile=patient.objects.filter(user=User.objects.get(username=serializer.data['username'])).update(**prof)
+                print(profile)
+                prof_ser=patients(patient.objects.get(user=User.objects.get(username=serializer.data['username'])))
+                return Response({
+                    "user":serializer.data,
+                    "profile":prof_ser.data,
+                    "token":Token.objects.get(user=user).key,
+                    "message":"account created successfully"
+                })
+            else:
+                prof=None
+                return Response({
+                    "user":serializer.data,
+                    "token":Token.objects.get(user=user).key,
+                    "message":"account created successfully"
+                })
+        except:
+            return Response({'message':'there is error in data'})
 class signup_secretaries(generics.GenericAPIView):
     serializer_class=secretary_serializer
     
     def post(self,request,*args, **kwargs):
-        serializer=self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user=serializer.save()
-        return Response({
-            "user":UserSerializer(user,context=self.get_serializer_context()).data,
-            "token":Token.objects.get(user=user).key,
-            "message":"account created successfully"
-        })
+        try:
+            serializer=secretary_serializer(data=request.data['user'])
+            serializer.is_valid(raise_exception=True)
+                
+            user=serializer.save()
+            if request.data['profile']:
+
+                prof=request.data['profile']
+                print(prof)
+                profile=secretary.objects.filter(user=User.objects.get(username=serializer.data['username'])).update(**prof)
+                print(profile)
+                prof_ser=secretaries(secretary.objects.get(user=User.objects.get(username=serializer.data['username'])))
+                return Response({
+                    "user":serializer.data,
+                    "profile":prof_ser.data,
+                    "token":Token.objects.get(user=user).key,
+                    "message":"account created successfully"
+                })
+            else:
+                prof=None
+                return Response({
+                    "user":serializer.data,
+                    "token":Token.objects.get(user=user).key,
+                    "message":"account created successfully"
+                })
+        except:
+            return Response({'message':'There is error in data'})
 class signup_doctors(generics.GenericAPIView):
     serializer_class=doctor_serializer
-    
+
     def post(self,request,*args, **kwargs):
-        serializer=self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user=serializer.save()
-  
-        return Response({
-            "user":UserSerializer(user,context=self.get_serializer_context()).data,
-            "token":Token.objects.get(user=user).key,
-            "message":"account created successfully"
-        })
+        try:
+            flag=User.objects.filter(username=request.data.get('user')).count()
+            if flag == 0:
+                serializer=doctor_serializer(data=request.data['user'])
+                if serializer.is_valid(raise_exception=True):
+                        
+                    user=serializer.save()
+                    if request.data.get('profile'):
+                        prof=request.data['profile']
+                        print(prof)
+                        profile=doctor.objects.filter(user=User.objects.get(username=serializer.data['username'])).update(**prof)
+                        print(doctor.objects.get(user=User.objects.get(username=serializer.data['username'])))
+                        prof_ser=patients(doctor.objects.get(user=User.objects.get(username=serializer.data['username'])))
+                        return Response({
+                            "user":serializer.data,
+                            "profile":prof_ser.data,
+                            "token":Token.objects.get(user=user).key,
+                            "message":"account created successfully"
+                        })
+                    elif request.data.get('qualifications'):
+                        quals=request.data.get('qualifications')
+                    else:
+                        prof=None
+                        return Response({
+                            "user":serializer.data,
+                            "token":Token.objects.get(user=user).key,
+                            "message":"account created successfully"
+                        })
+                else:
+                    message=[]
+                    message.append(serializer.errors)
+                    return Response({'errors':message},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response({'errors':"A user with that username already exists."},status=status.HTTP_400_BAD_REQUEST)
+        except:
+                return Response({'message':'there is error in data'})
 class signup_doctors_info(generics.GenericAPIView):
     authentication_classes=[TokenAuthentication]
     permission_classes = [IsAuthenticated]
